@@ -9,6 +9,7 @@ import (
 // ConfigStructure is structure of main configuration
 type ConfigStructure struct {
 	RootDir                string                      `json:"rootDir"`
+	PublicRootDir          string                      `json:"publicRootDir"`
 	DownloadConcurrency    int                         `json:"downloadConcurrency"`
 	DownloadLimit          int64                       `json:"downloadSpeedLimit"`
 	Architectures          []string                    `json:"architectures"`
@@ -54,6 +55,7 @@ type SwiftPublishRoot struct {
 // Config is configuration for aptly, shared by all modules
 var Config = ConfigStructure{
 	RootDir:                filepath.Join(os.Getenv("HOME"), ".aptly"),
+	PublicRootDir:          "",
 	DownloadConcurrency:    4,
 	DownloadLimit:          0,
 	Architectures:          []string{},

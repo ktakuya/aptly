@@ -25,6 +25,11 @@ func NewPublishedStorage(root string) *PublishedStorage {
 	return &PublishedStorage{rootPath: filepath.Join(root, "public")}
 }
 
+// NewPublishedStorageDirect creates new instance of PublishedStorage which directly refers to path
+func NewPublishedStorage(path string) *PublishedStorage {
+	return &PublishedStorage{rootPath: path}
+}
+
 // PublicPath returns root of public part
 func (storage *PublishedStorage) PublicPath() string {
 	return storage.rootPath

@@ -313,7 +313,11 @@ func (context *AptlyContext) GetPublishedStorage(name string) aptly.PublishedSto
 	publishedStorage, ok := context.publishedStorages[name]
 	if !ok {
 		if name == "" {
-			publishedStorage = files.NewPublishedStorage(context.config().RootDir)
+			if context.config().PublicRootDir == "" {
+				publishedStorage = files.NewPublishedStorage(context.config().RootDir)
+			} else {
+				publishedStorage = files.NewPublishedStorageDirect(context.config.PublicRootDir)
+			}
 		} else if strings.HasPrefix(name, "s3:") {
 			params, ok := context.config().S3PublishRoots[name[3:]]
 			if !ok {
